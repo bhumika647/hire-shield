@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "full_name": "Madhav Mehta",
+    "email": "mehta.madhav333@gmail.com",
+    "password": "Manan@1123",
+    "phone_number": "09837022715",
+    "college": "Miet",
+    "active": true
+  },
+  {
+    "id": 3,
+    "full_name": "Shony Mehta",
+    "email": "shonymehta10@gmail.com",
+    "password": "S@100209",
+    "phone_number": "8923689141",
+    "college": "IIT Delhi",
+    "active": true
+  },
+  {
+    "id": 4,
+    "full_name": "Ridhima jain",
+    "email": "ridhima.jain.cseds.2023@miet.ac.in",
+    "password": "Man@123",
+    "phone_number": "8218022401",
+    "college": "miet",
+    "active": true
+  },
+  {
+    "id": 5,
+    "full_name": "praff",
+    "email": "bprafullit@gmail.com",
+    "password": "Pa@12345",
+    "phone_number": "1234567890",
+    "college": "IIT Meerut",
+    "active": true
+  },
+  {
+    "id": 5,
+    "full_name": "Madhav Mehta",
+    "email": "madhavmehta333@gmail.com",
+    "password": "Ma@12345",
+    "phone_number": "9837022715",
+    "college": "MIET",
+    "active": true
+  }
+]

@@ -1,0 +1,376 @@
+[
+  {
+    "features": {
+      "10th": 99.0,
+      "12th": 99.0,
+      "CGPA": 5.0,
+      "Aptitude_score": 50.0,
+      "Program": "BCA",
+      "Internship": "No",
+      "Specialisation": "AI/ML"
+    },
+    "prediction": "Not Placed, No Bias",
+    "review_status": "reviewed",
+    "timestamp": "2025-11-10T17:51:23.499724",
+    "resume_file": null,
+    "review_label": "Placed",
+    "review_note": "low aptitude score"
+  },
+  {
+    "features": {
+      "10th": 0.0,
+      "12th": 0.0,
+      "CGPA": 0.0,
+      "Aptitude_score": 0.0,
+      "Program": "BCA",
+      "Internship": "No",
+      "Specialisation": "AI/ML"
+    },
+    "prediction": "Not Placed, No Bias",
+    "review_status": "pending",
+    "timestamp": "2025-11-15T23:24:19.673037",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 90.0,
+      "12th": 93.0,
+      "CGPA": 8.04,
+      "Aptitude_score": 99.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, No Bias",
+    "review_status": "pending",
+    "timestamp": "2025-11-17T00:32:35.574000",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 90.0,
+      "12th": 85.0,
+      "CGPA": 5.0,
+      "Aptitude_score": 87.0,
+      "Program": "BCA",
+      "Internship": "No",
+      "Specialisation": "CS/IT"
+    },
+    "prediction": "Not Placed, No Bias",
+    "review_status": "reviewed",
+    "timestamp": "2025-11-17T00:51:08.768771",
+    "resume_file": null,
+    "review_label": "Placed",
+    "review_note": "provide the rason here"
+  },
+  {
+    "features": {
+      "10th": 75.0,
+      "12th": 75.0,
+      "CGPA": 7.5,
+      "Aptitude_score": 75.0,
+      "Program": "BTech",
+      "Internship": "Yes",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-20T22:55:17.795042",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 99.2,
+      "12th": 98.0,
+      "CGPA": 9.0,
+      "Aptitude_score": 75.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-20T23:56:44.471569",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 75.0,
+      "12th": 80.0,
+      "CGPA": 7.7,
+      "Aptitude_score": 76.0,
+      "Program": "BTech",
+      "Internship": "Yes",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-21T10:11:23.686698",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 75.0,
+      "12th": 80.0,
+      "CGPA": 7.7,
+      "Aptitude_score": 76.0,
+      "Program": "BTech",
+      "Internship": "Yes",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-21T10:11:31.171274",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 65.0,
+      "12th": 68.0,
+      "CGPA": 7.5,
+      "Aptitude_score": 70.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Not Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-21T12:14:58.442849",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 65.0,
+      "12th": 70.0,
+      "CGPA": 7.8,
+      "Aptitude_score": 70.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Computer Applications"
+    },
+    "prediction": "Not Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-21T12:15:46.554933",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 70.0,
+      "12th": 72.0,
+      "CGPA": 7.6,
+      "Aptitude_score": 70.0,
+      "Program": "BTech",
+      "Internship": "Yes",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-21T12:16:16.518614",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 65.0,
+      "12th": 69.0,
+      "CGPA": 7.0,
+      "Aptitude_score": 75.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Not Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-21T12:16:55.381078",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 75.0,
+      "12th": 78.0,
+      "CGPA": 7.9,
+      "Aptitude_score": 77.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-21T12:17:35.828173",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 71.0,
+      "12th": 70.0,
+      "CGPA": 6.8,
+      "Aptitude_score": 67.0,
+      "Program": "BTech",
+      "Internship": "Yes",
+      "Specialisation": "Computer Applications"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-21T12:18:15.943262",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 65.0,
+      "12th": 68.0,
+      "CGPA": 6.9,
+      "Aptitude_score": 80.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Not Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-21T12:19:09.615124",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 50.0,
+      "12th": 80.0,
+      "CGPA": 7.5,
+      "Aptitude_score": 80.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-24T15:38:48.658280",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 50.0,
+      "12th": 80.0,
+      "CGPA": 7.5,
+      "Aptitude_score": 70.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-24T15:44:25.257083",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 50.0,
+      "12th": 80.0,
+      "CGPA": 7.5,
+      "Aptitude_score": 70.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-26T08:57:38.893151",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 87.33,
+      "12th": 87.0,
+      "CGPA": 8.4,
+      "Aptitude_score": 50.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-26T10:31:33.646779",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 87.33,
+      "12th": 87.0,
+      "CGPA": 8.4,
+      "Aptitude_score": 50.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-26T10:31:55.961479",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 97.0,
+      "12th": 94.0,
+      "CGPA": 9.0,
+      "Aptitude_score": 85.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-11-26T14:09:33.764805",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  },
+  {
+    "features": {
+      "10th": 80.0,
+      "12th": 83.0,
+      "CGPA": 7.9,
+      "Aptitude_score": 78.0,
+      "Program": "BTech",
+      "Internship": "No",
+      "Specialisation": "Data Science"
+    },
+    "prediction": "Placed, Fair",
+    "review_status": "pending",
+    "timestamp": "2025-12-10T17:38:12.683030",
+    "resume_file": null,
+    "review_label": null,
+    "review_note": null
+  }
+]

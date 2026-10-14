@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Complete Your Details | Hire Shield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Lato:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%; margin: 0; padding: 0;
+      background: radial-gradient(ellipse 110% 80% at 60% 45%, #223155 0%, #181d25 85%);
+      font-family:'Open Sans',Arial,sans-serif; color:#e9f2fa;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .particles-bg { pointer-events:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:0;}
+    .particle { position:absolute; border-radius:50%; background:radial-gradient(circle at 45% 40%, #36ccf9bb 0%, #8f4afb19 100%); opacity:.14; animation:float 14s linear infinite;}
+    @keyframes float {0%{transform:translateY(0) scale(1);}50%{opacity:.21;transform:translateY(-44vh) scale(1.12);}100%{opacity:.11;transform:translateY(-110vh) scale(1);}}
+    .resume-container { min-height: 100vh; width: 100vw; display: flex; align-items:center; justify-content:center; z-index:1;}
+    .resume-card {
+      background: linear-gradient(112deg,rgba(34,50,77,0.95) 68%,rgba(55,97,150,0.20) 100%);
+      box-shadow: 0 18px 55px #223760cc, 0 7px 17px #36ccf950;
+      border-radius: 2.2em;
+      padding: 1em 4.1em 1.2em 4.1em; /* More compact top/bottom */
+      max-width: 735px; width: 95vw; min-width:330px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .logo-img { width:52px; height:52px; margin-bottom:.38em; filter:drop-shadow(0 0 10px #36ccf9cc);}
+    h1 {
+      font-family:'Orbitron','Segoe UI',sans-serif;
+      font-size: 1.18em; font-weight: 900; margin:.17em 0 1.05em 0; text-align:center;
+      background: linear-gradient(90deg,#36ccf9 15%,#8f4afb 79%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: 0.051em; user-select:none;
+    }
+    .progress-container { width:100%; margin-bottom:1em;}
+    .progress-label { font-weight:600; color:#77b6ff; font-size:.99em; margin-bottom: 4px;}
+    .progress-bar-bg { background:#16293a; height:8px; border-radius:5px; overflow:hidden;}
+    .progress-bar-fill { width:100%; height:100%; background:linear-gradient(90deg,#36ccf9,#8f4afb); border-radius:inherit; animation:progressFill .93s cubic-bezier(.64,.18,.58,1.1) forwards;}
+    @keyframes progressFill{from{width:0;}to{width:100%;}}
+    .missing-info {
+      color:#aee2ff;
+      margin-bottom:1.3em;
+      font-size: 1.05em;
+      background:rgba(17,27,36,0.08);
+      border-radius: 0.9em;
+      padding: 0.35em 1em;
+    }
+    .error-bar {
+      margin:.13em 0 1em 0; background:rgba(38,30,50,0.67); color:#ffaebc; font-weight:700; font-size:.98em;
+      border-radius:.8em;font-family:'Lato','Segoe UI',Arial; padding: 6px 17px 7px 17px;
+      box-shadow:0 2px 8px #e8677969;text-align:center;max-width:340px;
+    }
+    form { width:100%; }
+    .fields-grid {
+      display: flex; flex-wrap: wrap; gap: 0.71em 1.73em; width: 100%; justify-content: space-between; margin-bottom:1em;
+    }
+    .form-group {
+      flex: 1 1 44%; min-width: 180px; display: flex; flex-direction: column; margin-bottom: .03em;
+    }
+    .form-group.fullwidth { flex: 1 1 95%; }
+    label { font-weight: 650; margin-bottom: .02em; color: #86e3ff; letter-spacing: .008em; font-size: 0.97em;}
+    input, select {
+      padding: .63em 1.1em; font-size: 1.04em; border-radius: 1.21em;
+      border: none; background: rgba(38,61,100,0.54);
+      color: #cde5fd; font-weight: 600; box-shadow: 0 2px 9px #26cdf92e, 0 1.5px 3px #181d2566;
+      outline: none; margin-bottom: .02em; transition: box-shadow .14s, background .11s, color .11s, border .12s; backdrop-filter: blur(9px);
+    }
+    input:focus, select:focus {
+      background: rgba(60,99,173,0.71);
+      box-shadow: 0 0 12px #36ccf9cc, 0 2px 7px #5639f95c;
+      color: #fff;
+      border: 2px solid #6ad1ff;
+    }
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none; margin: 0;
+    }
+    input[type="number"] { appearance:textfield; -moz-appearance:textfield; }
+    select {
+      appearance: none; -webkit-appearance: none; -moz-appearance: none;
+      background: rgba(38,61,100,0.58); color: #def0ff;
+      box-shadow: 0 2px 11px #26cdf934, 0 1.5px 3.5px #26cdf916;
+      font-weight: 700; font-family: 'Lato', 'Segoe UI', Arial, sans-serif; border-radius: 1.13em; outline: none;
+    }
+    select:focus {
+      border: 2px solid #8f4afb;
+      color: #fff;
+      background: rgba(93,86,200,0.22);
+    }
+    select option {
+      background: rgba(18,28,58,0.93); color: #b7cffb; font-family: 'Lato', 'Segoe UI', Arial, sans-serif; border-radius: 0.8em; font-size: 1.01em; box-shadow: 0 0 9px #406aff30; margin: 7px 0; padding: 4px 11px;
+    }
+    .submit-btn {
+      width:100%; padding:1.02em 0; font-size:1.12em; font-weight:820;
+      border-radius:1.33em; border:none;
+      color:white; background:linear-gradient(92deg,#36ccf9 10%,#8f4afb 80%);
+      box-shadow:0 4px 15px #8f4afb9c; cursor:pointer; margin-top:.23em;
+      transition: background .13s, box-shadow .10s, transform .09s;
+      text-align:center; letter-spacing:.03em;
+    }
+    .submit-btn:hover, .submit-btn:focus {
+      background:linear-gradient(92deg,#8f4afb,#36ccf9);
+      box-shadow:0 5px 13px #6036fbbc;
+      transform: scale(1.025);
+    }
+    .page-footer {
+      margin-top: 1.06em; font-family:'Orbitron','Lato','Segoe UI',Arial; font-size:0.93em; letter-spacing: .03em; color:#a5c3f9;text-align:center; user-select:none;opacity: .97; border-top: 1.2px solid #2e4fd122; padding-top: .17em; background: linear-gradient(to right, #1c253f11, #4e78a822 55%, #181d2500 100%);
+    }
+    @media (max-width:900px){
+      .resume-card{max-width:99vw;padding:0.7em .5em;}
+      .fields-grid{gap:.38em 0.55em;}
+      .form-group,.form-group.fullwidth {min-width:90vw;}
+    }
+    @media (max-width:600px){
+      .fields-grid{flex-direction:column;gap:0.04em;}
+      .form-group,.form-group.fullwidth {min-width:97vw;}
+      .resume-card { padding:.09em .02em; }
+      h1{ font-size:.93em; margin-bottom:.93em; }
+    }
+    .back-btn {
+  position: absolute;
+  top: 3.8rem;
+  left: 22rem;
+  padding: 0.4em 0.9em;
+  font-size: 1.0rem;
+  font-weight: 700;
+  color: #ffffff; /* white text */
+  background: #ef5350; /* filled soft red */
+  border: none; /* no outline */
+  border-radius: 0.8em;
+  text-decoration: none;
+  user-select: none;
+  transition: background 0.22s, color 0.22s, transform 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 20px #ef5350cc; /* glow consistent with the red color */
+}
+
+.back-btn:hover,
+.back-btn:focus {
+  background: #b71c1c;
+  color: #fff;
+  outline: none;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #ef5350cc;}
+  50% { box-shadow: 0 0 20px #ef535088;}
+  100% { box-shadow: 0 0 10px #ef5350cc;}
+}
+  </style>
+</head>
+<body>
+  <div class="particles-bg" id="particles-bg"></div>
+  <div class="resume-container">
+    <div class="resume-card">
+      <a href="{{ url_for('applicant_method') }}" class="back-btn" aria-label="Back to Home">
+  &#8678; Back
+</a>
+      <img src="{{ url_for('static', filename='images/Hire-Shield-Logo.png') }}" alt="Hire Shield Logo" class="logo-img" />
+      <h1>Complete Your Resume Details</h1>
+      <div class="progress-container">
+        <div class="progress-label">Step 2 of 2</div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
+      </div>
+      <div class="missing-info">We couldn't extract some details from your resume. Please fill in the missing information:</div>
+      {% if error %}
+        <div class="error-bar">{{ error }}</div>
+      {% endif %}
+      <form method="post" autocomplete="off" novalidate>
+        <div class="fields-grid">
+          {% if '10th' in missing %}
+          <div class="form-group">
+            <label for="tenth">10th Grade Percentage</label>
+            <input type="number" name="10th" id="tenth" step="0.01" min="0" max="100" required />
+          </div>
+          {% endif %}
+          {% if '12th' in missing %}
+          <div class="form-group">
+            <label for="twelfth">12th Grade Percentage</label>
+            <input type="number" name="12th" id="twelfth" step="0.01" min="0" max="100" required />
+          </div>
+          {% endif %}
+          {% if 'CGPA' in missing %}
+          <div class="form-group">
+            <label for="cgpa">CGPA</label>
+            <input type="number" name="CGPA" id="cgpa" step="0.01" min="0" max="10" required />
+          </div>
+          {% endif %}
+          {% if 'Aptitude_score' in missing %}
+          <div class="form-group">
+            <label for="aptitude_score">Aptitude Score</label>
+            <input type="number" name="Aptitude_score" id="aptitude_score" step="0.01" min="0" max="100" required />
+          </div>
+          {% endif %}
+          {% if 'Gender_encoded' in missing %}
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select name="Gender" id="gender" required>
+              <option value="">Select</option>
+              <option value="0">Female</option>
+              <option value="1">Male</option>
+            </select>
+          </div>
+          {% endif %}
+          {% if 'Program_encoded' in missing %}
+          <div class="form-group">
+            <label for="program">Program</label>
+            <select name="Program_encoded" id="program" required>
+              <option value="">Select</option>
+              <option value="0">BCA</option>
+              <option value="1">BTech</option>
+            </select>
+          </div>
+          {% endif %}
+          {% if 'Internship_encoded' in missing %}
+          <div class="form-group">
+            <label for="internship">Internship Experience</label>
+            <select name="Internship_encoded" id="internship" required>
+              <option value="">Select</option>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+          {% endif %}
+          {% if 'Specialisation_encoded' in missing %}
+          <div class="form-group fullwidth">
+            <label for="specialisation">Specialisation</label>
+            <select name="Specialisation_encoded" id="specialisation" required>
+              <option value="">Select</option>
+              <option value="0">AI/ML</option>
+              <option value="1">Computer Applications</option>
+              <option value="2">CS/IT</option>
+              <option value="3">Data Analytics</option>
+              <option value="4">Data Science</option>
+            </select>
+          </div>
+          {% endif %}
+        </div>
+        <button type="submit" class="submit-btn">Submit &amp; Get Results</button>
+      </form>
+      <footer class="page-footer">
+        © 2025 <b>Hire Shield™</b> &mdash; Secure, Unbiased AI Campus Placement
+      </footer>
+    </div>
+  </div>
+  <script>
+    // Bubble effect
+    const particlesCount = 18, bg = document.getElementById('particles-bg');
+    for(let i=0;i<particlesCount;i++){
+      let p=document.createElement('div');
+      p.className='particle';
+      let sz=24+Math.random()*55;
+      p.style.width=sz+'px';p.style.height=sz+'px';
+      p.style.left=Math.random()*100+'vw';p.style.top=Math.random()*100+'vh';
+      p.style.animationDuration=9+Math.random()*9+'s';
+      p.style.animationDelay=Math.random()*6+'s';
+      bg.appendChild(p);
+    }
+  </script>
+</body>
+</html>

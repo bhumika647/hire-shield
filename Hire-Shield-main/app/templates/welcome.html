@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hire Shield | Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    html,body { height: 100%; min-height: 100vh; }
+    body {
+      background: linear-gradient(120deg, #161d25 70%, #224b70 100%);
+      font-family: 'Open Sans', Arial, sans-serif;
+      color: #e9f2fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .main-page-wrapper {
+      flex: 1 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      min-height: 81vh;
+    }
+    /* Navbar Styles */
+    .navbar {
+      background: rgba(21, 27, 45, 0.97);
+      border-radius: 0 0 2rem 2rem;
+      box-shadow: 0 6px 20px #181f27b3;
+      border-bottom: 1.5px solid #8fe6fc2a;
+    }
+    .navbar-brand img {
+      height: 48px;
+      margin-right: 10px;
+      filter: drop-shadow(0 0 43px #36ccf9);
+    }
+    .navbar-brand {
+      color: #58aedc !important;
+      font-weight: 700;
+      font-size: 1.09em;
+      letter-spacing: 0.01em;
+    }
+    .navbar-nav {
+      gap: 0.5em;
+    }
+    .btn-nav {
+  background: linear-gradient(
+    135deg,
+    rgba(200, 230, 255, 0.45) 0%,
+    rgba(180, 225, 255, 0.55) 30%,
+    rgba(165, 210, 255, 0.65) 100%
+  );
+  backdrop-filter: blur(22px) saturate(125%);
+  border-radius: 1.2em;
+  box-shadow: 0 7px 28px rgba(22, 66, 109, 0.44);
+  padding: 10px 23px;
+  min-width: 95px;
+  margin-right: 10px;
+  font-weight: 700;
+  font-size: 1.02rem;
+  border: 2px solid rgba(54, 204, 249, 0.60);
+  color: #153a4c !important;
+  font-family: "Open Sans", Arial, sans-serif;
+  transition: box-shadow 0.17s, color 0.13s, background 0.23s, border 0.13s,
+    transform 0.2s;
+  text-align: center;
+  letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
+}
+
+    /* On hover or focus, only hovered button animates and glows */
+    .navbar-nav:hover .btn-nav:not(:hover) {
+      filter: brightness(0.85);
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    .btn-nav:hover,
+    .btn-nav:focus,
+    .btn-nav.active {
+  background: linear-gradient(
+    135deg,
+    rgba(55, 0, 255, 0.85) 0%,
+    rgba(3, 220, 254, 0.95) 100%
+  );
+  border: 2.7px solid #8f4afb;
+  color: #ffffff !important;
+  transform: scale(1.07);
+  z-index: 6;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+    /* -- LOGO & REFLECTION */
+    .logo-large-box {
+      width: 330px;
+      max-width: 34vw;
+      margin: 0 auto;
+      position: relative;
+    }
+    .logo-large {
+      width: 100%;
+      display: block;
+      filter: drop-shadow(0 0 90px #36ccf9b3);
+      animation: popCenter 1.7s cubic-bezier(0.28, 1.18, 0.24, 0.92);
+    }
+    .logo-reflection {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 104%;
+      opacity: 0.28;
+      transform: scaleY(-1) translateY(-7px);
+      pointer-events: none;
+      filter: blur(7px) brightness(1.35);
+      z-index: -1;
+    }
+    @keyframes popCenter {
+      0% {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+      45% {
+        transform: scale(1.11);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    /* Main Center Layout */
+    .center-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 38vh;
+      margin-top: 2vw;
+      margin-bottom: 0;
+    }
+    .center-left {
+      flex: 1 1 62%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      padding-right: 5vw;
+      text-align: right;
+      opacity: 0.92;
+      z-index: 2;
+    }
+    .center-right {
+      flex: 0 1 34vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-left: 1vw;
+      z-index: 2;
+    }
+    .main-line {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #36ccf9 8%, #8f4afb 85%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.03em;
+      text-shadow: 0 3px 14px #000b19, 0 8px 26px #357ef7b0;
+      margin-bottom: 1.3rem;
+      margin-right: 1vw;
+      font-family: "Orbitron", "Segoe UI", sans-serif;
+      opacity: 0.97;
+    }
+    .divider {
+      height: 5px;
+      width: 145px;
+      border-radius: 7px;
+      margin-top: 18px;
+      margin-left: auto;
+      background: linear-gradient(90deg, #36ccf9 35%, #8f4afb 100%);
+      box-shadow: 0 0 12px #36ccf9b3;
+    }
+    /* KPI Cards */
+    .kpi-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 1.5em;
+      margin-top: 0.5em;
+      z-index: 10;
+    }
+    .glass-card {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.23) 0%,
+        rgba(221, 234, 255, 0.21) 100%
+      );
+      backdrop-filter: blur(17px) saturate(115%);
+      border-radius: 1.2em;
+      box-shadow: 0 8px 30px #16426dbd;
+      padding: 1em 1.18em;
+      text-align: center;
+      min-width: 155px;
+      border: 2px solid #36ccf9a8;
+      color: #262c41;
+      font-family: "Open Sans", Arial, sans-serif;
+      transition: box-shadow 0.17s, color 0.13s, background 0.2s, border 0.13s;
+    }
+    .glass-card:hover {
+      box-shadow: 0 10px 39px #8f4afb42, 0 8px 30px #36ccf9cc;
+      background: linear-gradient(
+        135deg,
+        rgba(190, 234, 232, 0.21) 0%,
+        rgba(255, 255, 255, 0.28) 100%
+      );
+      color: #8f4afb;
+      border: 2px solid #8f4afb67;
+    }
+    .kpi-label {
+      color: #36ccf9;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 0.7em;
+      letter-spacing: 0.06em;
+      background: linear-gradient(90deg, #36ccf9 25%, #8f4afb 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .kpi-value {
+      color: #153a4c;
+      font-size: 1.39rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.3em;
+      background: linear-gradient(90deg, #8f4afb 10%, #36ccf9 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Footer */
+    footer {
+      width: 100%;
+      background: linear-gradient(90deg, #181e2d 5%, #22344b 80%);
+      color: #36ccf9;
+      text-align: center;
+      padding: 0.25em 0 0.18em 0;
+      font-size: 1.06em;
+      font-family: "Orbitron", "Segoe UI", Arial, sans-serif;
+      letter-spacing: 0.04em;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-top: 2px solid #36ccf9;
+      z-index: 100;
+    }
+    .footer-icon {
+      color: #8f4afb;
+      font-size: 1.16em;
+      vertical-align: -0.15em;
+      margin: 0 0.21em;
+    }
+    .footer-copy {
+      font-size: 0.85em;
+      color: #a8cdfc;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    @media (max-width: 950px) {
+      .center-flex {
+        flex-direction: column;
+      }
+      .center-left,
+      .center-right {
+        padding: 0;
+        text-align: center;
+        align-items: center;
+      }
+      .main-line {
+        margin-right: 0;
+      }
+      .logo-large-box {
+        width: 65vw;
+        max-width: 250px;
+      }
+    }
+    @media (max-width: 700px) {
+      .logo-large-box {
+        width: 85vw;
+        max-width: 150px;
+      }
+      .glass-card {
+        padding: 0.6em 0.3em;
+        min-width: 120px;
+      }
+      .kpi-row {
+        gap: 7px;
+      }
+    }
+    .btn-login {
+  background: linear-gradient(90deg, #36ccf9 16%, #8f4afb 82%);
+  color: #fff !important;
+  font-weight: 900;
+  border-radius: 1.6em;
+  font-size: 1.05em;
+  padding: .48em 2.1em;
+  box-shadow: 0 2px 16px #36ccf94a;
+  letter-spacing: 0.045em;
+  border: none;
+  transition: background .19s,box-shadow .18s,transform .13s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-right: 8px;
+}
+.btn-login:hover, .btn-login:focus {
+  background: linear-gradient(90deg, #8f4afb 10%, #36ccf9 97%);
+  color: #fff !important;
+  box-shadow: 0 7px 24px #8f4afb95;
+  outline: none;
+  transform: scale(1.05);
+}
+.dropdown-menu-login {
+  min-width: 155px;
+  background: rgba(38,56,97,0.98);
+  border-radius: 1.25em;
+  box-shadow: 0 5px 25px #36ccf975;
+  border: 1px solid #36ccf94c;
+  margin-top: 0.25em;
+  padding: .5em 0;
+}
+.dropdown-item-login {
+  color: #fff;
+  font-weight: 700;
+  padding: .65em 1.3em;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 1.1em;
+  display: block;
+  font-size: 1.04em;
+  transition: background .15s,color .13s;
+  text-decoration: none;
+}
+.dropdown-item-login:hover, .dropdown-item-login:focus {
+  background: linear-gradient(90deg,#36ccf9 14%,#8f4afb 97%);
+  color: #181f27;
+}
+.dropdown-caret { transition: transform .16s; }
+.btn-login[aria-expanded="true"] .dropdown-caret { transform: rotate(180deg); }
+  </style>
+</head>
+<script>
+function toggleLoginDropdown() {
+  let dd = document.getElementById('loginDropdown');
+  let btn = document.getElementById('loginDropdownLink');
+  let expanded = dd.style.display === 'block';
+  dd.style.display = expanded ? 'none' : 'block';
+  btn.setAttribute("aria-expanded", !expanded);
+}
+// Hide dropdown when clicking outside
+document.addEventListener('click', function(event) {
+  var dd = document.getElementById('loginDropdown');
+  var btn = document.getElementById('loginDropdownLink');
+  if (!event.target.closest('.nav-item.dropdown')) {
+    dd.style.display = 'none';
+    btn && btn.setAttribute('aria-expanded','false');
+  }
+});
+</script>
+
+<body>
+  <div class="main-page-wrapper">
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm px-3 py-3 mb-3" style="background: rgba(21,27,45,0.97); border-bottom: 1.5px solid #8fe6fc2a;">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="{{ url_for('static', filename='images/Hire-Shield-Logo.png') }}" alt="Hire Shield Logo" style="height: 48px; margin-right: 10px; filter: drop-shadow(0 0 43px #36ccf9);" />
+      HIRE SHIELD
+    </a>
+    <div class="navbar-nav flex-row align-items-center" style="gap:.45em;">
+      <a class="btn btn-nav {% if request.endpoint == 'welcome' %}active{% endif %}" href="{{ url_for('welcome') }}">Home</a>
+      <a class="btn btn-nav" href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a class="btn btn-nav" href="{{ url_for('about') }}">About Us</a>
+      <!-- LOGIN DROPDOWN BUTTON -->
+      <div class="nav-item dropdown" style="position: relative;">
+        <a class="btn btn-login" href="#" id="loginDropdownLink" onclick="event.preventDefault();toggleLoginDropdown();" aria-expanded="false">
+          Login
+          <svg width="15" height="15" viewBox="0 0 20 20" class="dropdown-caret" style="margin-left:0.48em;">
+            <polyline points="5,7 10,13 15,7" fill="none" stroke="#fff" stroke-width="2" />
+          </svg>
+        </a>
+        <ul id="loginDropdown" class="dropdown-menu-login" style="display:none;position:absolute;top:44px;right:0;z-index:102;">
+          <li>
+            <a class="dropdown-item-login" href="{{ url_for('recruiter_login') }}">Recruiter</a>
+          </li>
+          <li>
+            <a class="dropdown-item-login" href="{{ url_for('applicant_login') }}">Applicant</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Main Center Section -->
+    <div class="container mb-0 pb-0">
+      <div class="center-flex">
+        <div class="center-left">
+          <div class="main-line">
+            Elevate Your Campus
+            <br />Hiring. Uncover Fairness
+            <br />and Performance with AI.
+          </div>
+          <div class="divider"></div>
+        </div>
+        <div class="center-right">
+          <div class="logo-large-box">
+            <img
+              src="static/images/Hire-Shield-Logo.png""
+              class="logo-large"
+              alt="Hire Shield Logo"
+            />
+            <img
+              src="static/images/Hire-Shield-Logo.png""
+              class="logo-reflection"
+              alt="Logo Reflection"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI Cards Section -->
+    <div class="container px-2">
+      <div class="kpi-row">
+        <div class="glass-card">
+          <div class="kpi-label">Bias-free Predictions</div>
+          <div class="kpi-value">97.8%</div>
+          <div class="kpi-label">Accuracy</div>
+        </div>
+        <div class="glass-card">
+          <div class="kpi-label">Applicants Reviewed</div>
+          <div class="kpi-value">872</div>
+          <div class="kpi-label">Last Month</div>
+        </div>
+        <div class="glass-card">
+          <div class="kpi-label">Analytics Tools</div>
+          <div class="kpi-value">8</div>
+          <div class="kpi-label">Dashboard Features</div>
+        </div>
+        <div class="glass-card">
+          <div class="kpi-label">Placement Success Rate</div>
+          <div class="kpi-value">92%</div>
+          <div class="kpi-label">All Streams</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Hire Shield&trade;
+    <span class="footer-icon">&#128640;</span>
+    <span class="footer-copy">
+      All Rights Reserved. Powered by <span style="color: #8f4afb">Hire Shield AI Platform</span>.
+    </span>
+  </footer>
+
+  <!-- Bootstrap JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

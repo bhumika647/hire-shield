@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recruiter Signup | Hire Shield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    html, body {height: 100%; margin: 0; padding: 0; background: radial-gradient(ellipse 110% 80% at 60% 45%, #223155 0%, #181d25 76%);}
+    body {font-family: 'Open Sans', Arial, sans-serif; color: #e9f2fa;}
+    .particles-bg {pointer-events: none; position: fixed; top:0; left:0; width:100vw; height:100vh; z-index:0;}
+    .particle {position: absolute; border-radius:50%; background: radial-gradient(circle at 45% 40%, #36ccf9bb 0%, #8f4afb10 100%); opacity:.13; animation: float 16s linear infinite;}
+    @keyframes float {0%{transform:translateY(0) scale(1);} 50%{opacity:.23;transform:translateY(-44vh) scale(1.08);} 100%{opacity:.13;transform:translateY(-100vh) scale(1);}}
+    .signup-container {min-height: 100vh; display: flex; align-items: center; justify-content: center;}
+    .signup-card {
+      background: linear-gradient(130deg, rgba(34,50,77,0.91) 65%, rgba(55,97,150,0.19) 100%);
+      box-shadow: 0 22px 58px #1a2d51a3, 0 8px 18px #36ccf957;
+      border-radius: 1.3em;
+      padding: 2.1em 2.7em 1.2em 2.7em;
+      max-width: 545px; width: 105vw; min-width: 310px;
+      border: 2px solid #36ccf980;
+      display: flex; flex-direction: column; align-items: center;
+      animation: fadeInCard .85s cubic-bezier(.43,0,.38,1.11);
+      position: relative;
+    }
+    @keyframes fadeInCard {from{opacity:0; transform:translateY(35px) scale(.97);} to{opacity:1; transform:none;}}
+    .logo-signup-img {
+      width: 60px; height: 60px; margin-bottom:.25em;
+      display: block; margin-left: auto; margin-right: auto;
+      animation: logoIntro .7s cubic-bezier(.48,.49,.48,1.13);
+    }
+    @keyframes logoIntro {from{opacity:0;transform:scale(.82);} 70%{opacity:1;transform:scale(1.07);} to{opacity:1;transform:none;}}
+    h1 {
+      text-align: center; font-family: 'Orbitron', 'Segoe UI', sans-serif;
+      font-size: 1.19em; font-weight: 800; letter-spacing:.02em; margin-bottom: 1em;
+      background: linear-gradient(90deg,#36ccf9 10%,#8f4afb 82%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .signup-fields-wrap {
+      display: flex; flex-wrap: wrap; gap: 1.4em 1em; margin-bottom: .85em; justify-content: space-between;
+    }
+    .form-group { flex: 1 1 43%; min-width: 144px; position: relative; margin-bottom: .12em; display: flex; flex-direction: column;}
+    .form-group.fullwidth {flex: 1 1 100%;}
+    label { font-weight: 600; font-size: .97em; color: #91e0f9; margin-bottom: .13em; letter-spacing: .01em; }
+    .form-control {
+      width: 100%; font-size: .93em; font-weight: 600;
+      background: rgba(242,247,255,0.12); border: none;
+      border-radius: 1.1em; padding: .67em 1.05em; color: #151d3b;
+      box-shadow: 0 0 11px #8f4afb10;
+      transition: box-shadow .17s, background .13s, border-color .17s;
+      outline: none;
+      border: 2px solid #28384d44;
+    }
+    .form-control:focus {
+      box-shadow: 0 0 11px #36ccf96e;
+      border-color: #8f4afb;
+      background: rgba(255,255,255,0.19);
+      color: #112244;
+    }
+    .field-msg {
+      font-size: .85em; min-height: 13px; margin: 2px 0 0 1.2em;
+      color: #f7bf5f; letter-spacing: 0.01em; font-weight: 600; line-height:1.2;
+      opacity: .78; padding-left: 13px;
+      background: url('https://cdn.jsdelivr.net/gh/iconic/open-iconic/svg/info.svg') no-repeat left 0.13em/11px 11px;
+      display:inline-block;
+      transition: color .15s;
+    }
+    .field-msg.error {
+      color: #ff607f; background: url('https://cdn.jsdelivr.net/gh/iconic/open-iconic/svg/x.svg') no-repeat left center/11px 11px;
+      font-weight: 700; opacity:.81;
+    }
+    .form-info {
+      font-size: 0.81em; color:#89b4f1; margin-top:-7px; margin-bottom:9px; font-weight:500; letter-spacing:.03em;text-align:center;
+    }
+    .btn-signup {
+      display: block; border-radius: 2em; font-weight: 700; font-size: 1em;
+      background: linear-gradient(93deg, #36ccf9 18%, #8f4afb 87%);
+      color: #fff; border: none; padding: 0.61em 0; width: 38%;
+      min-width: 110px; max-width: 170px; margin: 1.72em auto .3em auto;
+      box-shadow: 0 3px 15px #36ccf983;
+      letter-spacing:.05em; cursor:pointer;
+      transition: background .17s, box-shadow .16s, transform .12s;
+      animation: btnPopIn .8s;
+    }
+    .btn-signup:hover {
+      background: linear-gradient(93deg, #8f4afb 22%, #36ccf9 87%);
+      box-shadow: 0 7px 24px #8f4afb64; color: #fff; transform: scale(1.04);
+    }
+    @keyframes btnPopIn {from{opacity:0;transform:scale(0.91);}to{opacity:1;transform:none;}}
+    .page-footer {
+      width: 35vw; text-align: center; background: transparent;
+      color: #95b0ff; font-family: 'Orbitron', 'Segoe UI', Arial;
+      margin-top: 1rem; font-size: 0.99em; letter-spacing: .04em;
+      opacity: 0.89; padding-bottom: .7em; padding-top: .18em;
+      border: none;
+    }
+    .page-footer .footer-icon {font-size: 1.em; color: #36ccf9; vertical-align:-.14em; margin-right:1px; }
+    .page-footer .footer-highlight {color:#8f4afb;}
+    @media (max-width: 650px) {
+      .signup-card {max-width: 98vw; min-width: 97vw; padding: 1.3rem .9rem;}
+      .signup-fields-wrap {flex-direction: column; gap: 1em;}
+      .btn-signup {width: 85%;}
+      label {font-size: .93em;}
+      .form-control {font-size: .92em;}
+      h1 {font-size: 1em;}
+    }
+    .back-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.4em 0.9em;
+  font-size: 1.0rem;
+  font-weight: 700;
+  color: #ffffff; /* white text */
+  background: #ef5350; /* filled soft red */
+  border: none; /* no outline */
+  border-radius: 0.8em;
+  text-decoration: none;
+  user-select: none;
+  transition: background 0.22s, color 0.22s, transform 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 20px #ef5350cc; /* glow consistent with the red color */
+}
+
+.back-btn:hover,
+.back-btn:focus {
+  background: #b71c1c;
+  color: #fff;
+  outline: none;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #ef5350cc;}
+  50% { box-shadow: 0 0 20px #ef535088;}
+  100% { box-shadow: 0 0 10px #ef5350cc;}
+}
+  </style>
+</head>
+<body>
+  <div class="particles-bg" id="particles-bg"></div>
+  <div class="signup-container">
+    <div class="signup-card">
+      <a href="{{ url_for('recruiter_login') }}" class="back-btn" aria-label="Back to Home">
+  &#8678; Back
+</a>
+      <img src="static/images/Hire-Shield-Logo.png" alt="Hire Shield Logo" class="logo-signup-img"/>
+      <h1>Create Recruiter ID</h1>
+      <form method="post" onsubmit="return validateForm()" id="signupForm" autocomplete="off">
+        <div class="signup-fields-wrap">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" class="form-control" oninput="validateUsername()" required autocomplete="username"/>
+            <div id="username-msg" class="field-msg"></div>
+          </div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" required />
+            <div class="form-info"></div>
+          </div>
+          <div class="form-group">
+            <label for="company">Company Name</label>
+            <input type="text" id="company" name="company" class="form-control" oninput="validateCompany()" required />
+            <div id="company-msg" class="field-msg"></div>
+          </div>
+          <div class="form-group">
+            <label for="email">Company Email</label>
+            <input type="email" id="email" name="email" class="form-control" oninput="validateEmail()" required autocomplete="email" />
+            <!--
+<div id="email-msg" class="form-info">Personal Mails not Allowed</div>
+            -->
+          </div>
+          <div class="form-group fullwidth">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" oninput="validatePassword()" required autocomplete="new-password" />
+            <div id="password-msg" class="field-msg"></div>
+          </div>
+        </div>
+        <button type="submit" class="btn-signup">Sign Up</button>
+      </form>
+      <footer class="page-footer">
+        <span class="footer-icon">&#128188;</span>
+        <span class="footer-highlight">Trusted Recruiter Network</span> &mdash; Professional, Secure, AI-powered
+      </footer>
+    </div>
+  </div>
+  <script>
+    // Animated particles
+    const particlesCount = 27;
+    const bg = document.getElementById('particles-bg');
+    for (let i = 0; i < particlesCount; i++) {
+      let p = document.createElement('div');
+      p.className = 'particle';
+      let sz = 26 + Math.random() * 120;
+      p.style.width = sz + 'px';
+      p.style.height = sz + 'px';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.animationDuration = 8.5 + Math.random() * 14 + 's';
+      p.style.animationDelay = Math.random() * 7.3 + 's';
+      bg.appendChild(p);
+    }
+
+    // Custom inline error/warn messaging
+    function setMsg(id, message, error=false) {
+      const el = document.getElementById(id+"-msg");
+      el.textContent = message;
+      el.className = "field-msg" + (error && message ? " error" : "");
+    }
+    function setValidity(input, valid, message) {
+      input.style.borderColor = valid ? "#36ccf9" : "#ff607f";
+      setMsg(input.id, valid ? "" : message, !valid);
+      input.setCustomValidity(valid ? "" : message);
+    }
+    function validateUsername() {
+      const input = document.getElementById('username');
+      const regex = /^[A-Za-z0-9_]{4,20}$/;
+      setValidity(input, regex.test(input.value), "4-20 letters/digits/underscores");
+    }
+    function validatePassword() {
+      const input = document.getElementById('password');
+      const value = input.value;
+      const strong = value.length >= 8 && /[A-Z]/.test(value) && /[a-z]/.test(value) && /\d/.test(value);
+      setValidity(input, strong, "Min 8 chars, 1 uppercase, 1 number");
+    }
+    function validateEmail() {
+      const input = document.getElementById('email');
+      const email = input.value.toLowerCase();
+      const personalDomains = ['gmail.com','yahoo.com','hotmail.com','outlook.com','rediffmail.com'];
+      let domain = '';
+      if(email.indexOf('@')>-1) domain = email.split('@')[1];
+      setValidity(input, !personalDomains.includes(domain), "Please use work email");
+    }
+    function validateCompany() {
+      const input = document.getElementById('company');
+      setValidity(input, input.value.trim().length >= 3, "Min 3 chars");
+    }
+    function validateForm() {
+      validateUsername(); validatePassword(); validateEmail(); validateCompany();
+      const ids=['username','password','email','company'];
+      for(let id of ids){
+        const elem=document.getElementById(id);
+        if(!elem.checkValidity()){
+          elem.reportValidity();
+          return false;
+        }
+      }
+      return true;
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placement Prediction</title>
+</head>
+<body>
+    <h2>Placement Prediction Form (Encoded Inputs)</h2>
+    <form method="post" action="/predict">
+
+        <label for="Gender_encoded">Gender (encoded):</label>
+        <select id="Gender_encoded" name="Gender_encoded" required>
+            <option value="0">Female</option>
+            <option value="1">Male</option>
+        </select><br><br>
+
+        <label for="Board_encoded">Board (encoded):</label>
+        <select id="Board_encoded" name="Board_encoded" required>
+            <option value="0">Central</option>
+            <option value="1">Other</option>
+        </select><br><br>
+
+        <label for="Program_encoded">Program (encoded):</label>
+        <select id="Program_encoded" name="Program_encoded" required>
+            <option value="0">B.Tech</option>
+            <option value="1">M.Tech</option>
+            <option value="2">Other</option>
+        </select><br><br>
+
+        <label for="Internship_encoded">Internship (encoded):</label>
+        <select id="Internship_encoded" name="Internship_encoded" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br><br>
+
+        <label for="Specialisation_encoded">Specialisation (encoded):</label>
+        <select id="Specialisation_encoded" name="Specialisation_encoded" required>
+            <option value="0">Mkt&Fin</option>
+            <option value="1">Mkt&HR</option>
+            <option value="2">Other</option>
+        </select><br><br>
+
+        <label for="10th">10th Percentage:</label>
+        <input type="number" step="0.01" id="10th" name="10th" required><br><br>
+
+        <label for="12th">12th Percentage:</label>
+        <input type="number" step="0.01" id="12th" name="12th" required><br><br>
+
+        <label for="CGPA">Degree CGPA:</label>
+        <input type="number" step="0.01" id="CGPA" name="CGPA" required><br><br>
+
+        <label for="Aptitude_score">Aptitude Score:</label>
+        <input type="number" step="0.01" id="Aptitude_score" name="Aptitude_score" required><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h3>Prediction Result: {{ prediction }}</h3>
+    {% endif %}
+</body>
+</html>

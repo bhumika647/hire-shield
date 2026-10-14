@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Result | Hire Shield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Lato:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    html,body {height:100%;margin:0;padding:0;
+      background:radial-gradient(ellipse 100% 80% at 60% 45%, #223155 0%, #181d25 85%);
+      font-family:'Open Sans',Arial,sans-serif;color:#e9f2fa;
+      display:flex;align-items:center;justify-content:center;overflow:hidden;}
+    .particles-bg {pointer-events:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;}
+    .particle {position:absolute;border-radius:50%;background:radial-gradient(circle at 45% 40%, #36ccf9bb 0%, #8f4afb19 100%);opacity:.14;animation:float 14s linear infinite;}
+    @keyframes float {0%{transform:translateY(0) scale(1);}50%{opacity:.22;transform:translateY(-44vh) scale(1.09);}100%{opacity:.11;transform:translateY(-110vh) scale(1);}}
+    .result-container { min-height:100vh;width:100vw;display:flex;align-items:center;justify-content:center;z-index:1;}
+    .result-card {
+      background: linear-gradient(112deg,rgba(34,50,77,0.97) 68%,rgba(55,97,150,0.18) 100%);
+      box-shadow:0 18px 55px #223760cc, 0 7px 21px #36ccf959;
+      border-radius:2.6em;
+      padding:2.5em 4.5em 2.1em 4.5em;
+      max-width:630px;min-width:360px;width:97vw;
+      display:flex;flex-direction:column;align-items:center;
+    }
+    .logo-img { width:54px; height:54px; margin-bottom:.43em; filter:drop-shadow(0 0 10px #36ccf9cc);}
+    h1 {
+      font-family:'Orbitron','Segoe UI',sans-serif;
+      text-align:center;margin:0 0 .73em 0;
+      font-size: 1.14em;font-weight:900;
+      background:linear-gradient(90deg,#36ccf9 18%,#8f4afb 70%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.053em;user-select:none;
+    }
+    .main-result {
+      display:flex;align-items:center;gap:.8em;margin:.31em 0 1.1em 0;
+    }
+    .placement-badge, .bias-badge {
+      font-size:1.11em;font-family:'Lato',sans-serif;
+      display:inline-flex;align-items:center;gap:.36em;
+      border-radius:1.1em;
+      padding:6px 17px 7px 16px;
+      font-weight:700;
+      margin:0 .9em .19em 0;
+      background:rgba(34,84,96,0.21);
+      text-shadow:0 2px 16px #36ccf95c;
+      letter-spacing:.01em;
+      box-shadow:0 3px 9px #8f4afb22, 0 2px 2px #36ccf922;
+      animation:fadeInBadge .75s cubic-bezier(.62,-0.07,.5,1.27);
+    }
+    .placement-badge.placed {color:#62ffab;background:rgba(3,51,80,0.21);}
+    .placement-badge.not-placed {color:#ff7f95;background:rgba(87,33,68,0.21);}
+    .bias-badge.fair {color:#03e7d2;background:rgba(22,74,82,0.20);}
+    .bias-badge.bias {color:#ffecb5;background:rgba(108,69,5,0.18);}
+    .placement-badge .icon, .bias-badge .icon {font-size:1.22em;}
+    @keyframes fadeInBadge { from{opacity:0;transform:scale(.95);} to{opacity:1;transform:scale(1);} }
+    .summary-title {margin:.25em 0 .8em 0;font-size:1.05em;color:#aee2ff;font-family:'Lato',sans-serif;font-weight:bold;}
+    .summary-card {
+      background:rgba(36,50,75,0.18);backdrop-filter:blur(8px);
+      border-radius:1.4em;
+      box-shadow:0 3px 11px #36ccf930, 0 2px 6px #4cf7e717;
+      padding: 0.96em 2.2em;
+      color:#d7ecf9;
+      font-family:'Lato','Segoe UI',Arial;
+      margin-bottom:1em;
+      font-size:1.01em;
+      width:100%;
+      max-width:420px;
+      word-break: break-word;
+    }
+    .summary-list {margin:0;padding:0;list-style:none;}
+    .summary-list li {
+      margin:.11em 0;font-weight:620;letter-spacing:.01em;display:flex;justify-content:space-between;
+    }
+    .summary-list span.val {color:#8fd8ff;font-weight:730;font-family:'Orbitron','Lato','Segoe UI',Arial;}
+.back-btn {
+  margin-top:1em;
+  padding: 1.08em 0;
+  width: 150%;
+  max-width: 260px;
+  font-size: 1.10em;
+  font-weight: 820;
+  border-radius: 0.7em; /* Less rounded, more rectangular */
+  border: none;
+  color: white;
+  background: linear-gradient(92deg,#36ccf9,#8f4afb);
+  box-shadow: 0 4px 14px #8f4afb9c;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background .15s, box-shadow .12s, transform .09s;
+  letter-spacing: .04em;
+  text-align: center;
+}
+    .back-btn:active::after {
+      content: '';display:block;position:absolute;left:50%;top:50%;width:0;height:0;
+      background:rgba(54,204,249,0.22);border-radius:50%;
+      transform:translate(-50%,-50%);
+      animation:ripple_anim .48s linear;z-index:1;
+    }
+    @keyframes ripple_anim {0%{width:0;height:0;opacity:1;}80%{width:240px;height:240px;opacity:.31;}100%{width:320px;height:320px;opacity:0;}}
+    .back-btn:hover,.back-btn:focus{background:linear-gradient(92deg,#8f4afb,#36ccf9);box-shadow:0 7px 15px #6036fbbc;transform: scale(1.04);}
+    .page-footer {
+      margin-top:1.10em;font-family:'Orbitron','Lato','Segoe UI',Arial;font-size:0.93em;letter-spacing:.03em;color:#a3c7fa;text-align:center;
+      user-select:none;opacity:.97;border-top:1.2px solid #2e4fd122;padding-top:.15em;background:linear-gradient(to right,#1c253f11,#4e78a822 55%,#181d2500 100%);
+    }
+    @media (max-width:900px){.result-card{max-width:97vw;padding:1.1em .42em;}}
+  </style>
+</head>
+<body>
+  <div class="particles-bg" id="particles-bg"></div>
+  <div class="result-container">
+    <div class="result-card">
+      <img src="{{ url_for('static', filename='images/Hire-Shield-Logo.png') }}" alt="Hire Shield Logo" class="logo-img"/>
+      <h1>Prediction Result</h1>
+      <div class="main-result">
+        <span class="placement-badge {% if placement_label == 'Placed' %}placed{% else %}not-placed{% endif %}">
+          {% if placement_label == 'Placed' %}<span class="icon">✅</span>Placed
+          {% else %}<span class="icon">❌</span>Not Placed
+          {% endif %}
+        </span>
+        <span class="bias-badge {% if bias_label == 'Fair' %}fair{% else %}bias{% endif %}">
+          {% if bias_label == 'Fair' %}<span class="icon">🟢</span>Fair
+          {% else %}<span class="icon">⚠️</span>Bias Detected
+          {% endif %}
+        </span>
+      </div>
+      <div class="summary-title">Applicant Details</div>
+      <div class="summary-card">
+        <ul class="summary-list">
+          <li>10th Grade <span class="val">{{ user_profile['10th'] }}</span></li>
+          <li>12th Grade <span class="val">{{ user_profile['12th'] }}</span></li>
+          <li>CGPA <span class="val">{{ user_profile['CGPA'] }}</span></li>
+          <li>Aptitude Score <span class="val">{{ user_profile['Aptitude_score'] }}</span></li>
+          <li>Program <span class="val">{{ user_profile['Program'] }}</span></li>
+          <li>Internship <span class="val">{{ user_profile['Internship'] }}</span></li>
+          <li>Specialisation <span class="val">{{ user_profile['Specialisation'] }}</span></li>
+        </ul>
+      </div>
+      <form action="{{ url_for('applicant_method') }}">
+        <button type="submit" class="back-btn">Back</button>
+      </form>
+      <footer class="page-footer">
+        © 2025 <b>Hire Shield™</b> &mdash; Secure, Unbiased AI Campus Placement
+      </footer>
+    </div>
+  </div>
+  <script>
+    // Bubble animation
+    const particlesCount = 19, bg = document.getElementById('particles-bg');
+    for(let i=0;i<particlesCount;i++){
+      let p=document.createElement('div');
+      p.className='particle';
+      let sz=25+Math.random()*61;
+      p.style.width=sz+'px';p.style.height=sz+'px';
+      p.style.left=Math.random()*100+'vw';p.style.top=Math.random()*100+'vh';
+      p.style.animationDuration=9+Math.random()*8+'s';
+      p.style.animationDelay=Math.random()*6+'s';
+      bg.appendChild(p);
+    }
+  </script>
+</body>
+</html>

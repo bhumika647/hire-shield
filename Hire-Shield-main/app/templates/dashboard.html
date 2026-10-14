@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hire Shield Dashboard | Hire Shield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Lato:wght@600&family=Open+Sans&display=swap" rel="stylesheet"/>
+  <style>
+    html, body { height: 100%; margin: 0; padding: 0; background: radial-gradient(ellipse 120% 90% at 60% 45%, #223155 8%, #181d25 88%); font-family: 'Open Sans', Arial, sans-serif; color: #e8eafd; width: 100vw; overflow-x: hidden; min-height: 100vh;}
+    .dashboard-container { padding: 2rem 2vw 2.7rem 2vw; max-width: 1260px; margin: 0 auto;}
+    .title-row { display: flex; align-items: center; margin-bottom: 0.7rem; gap: 1.4em;}
+    .dashboard-title { font-family: 'Orbitron', monospace; font-size: 2.15em; font-weight: 800; letter-spacing: .06em; background: linear-gradient(90deg,#36ccf9 18%,#c478fe 85%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+    .main-card-row {
+  display: flex; 
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 1.1em; 
+  margin-bottom: 1.2em;
+  flex-wrap: nowrap; /* Forces single line */
+}
+.big-stat-card.stat-flex {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 22vw;
+  margin: 0;
+}
+@media (max-width: 960px) {
+  .main-card-row { flex-direction: column; gap: 2.2em; }
+  .big-stat-card.stat-flex { max-width: none; width: 100%; }
+}
+    .big-stat-card { background: linear-gradient(115deg,rgba(33,43,77,0.97) 62%,rgba(58,67,120,0.18) 98%); box-shadow: 0 6px 30px #171c29be,0 3px 8px #4cf7e742; padding: 2.2em 2.9em; border-radius: 2.4em; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 200px; min-height: 144px; max-width: 260px;}
+    .big-stat-card .stat-val { font-family: 'Orbitron','Segoe UI'; font-size: 2.92em; font-weight: bold; color: #9be2ff; text-shadow: 0 2px 12px #35ccf93d;}
+    .big-stat-card .stat-label { margin-top: 0.55em; font-size: 1.14em; letter-spacing: .02em; color: #bfb7ff; font-family: 'Lato','Segoe UI'; text-align: center;}
+    .chart-row, .sub-row { display: flex; gap: 1.2em; flex-wrap: wrap; justify-content: space-between; margin-bottom: 2.1em;}
+    .card { background: linear-gradient(112deg,rgba(34,50,77,0.89) 80%,rgba(55,97,150,0.16) 100%); box-shadow: 0 0px 22px #36ccf93a; border-radius: 1.13em; padding: 1.15em 2em 1.4em 2em; min-width:180px; flex: 1 1 220px; margin: 0.7em 0; display:flex; flex-direction:column; align-items:center;}
+    .card canvas { margin: 0 auto;}
+    .legend-row { display: flex; gap: 1.3em; justify-content: center; margin-top: 0.87em; font-size: 0.96em;}
+    .legend-dot { display: inline-block; width: 1.18em; height: 1.18em; border-radius: 99em; margin-right: .38em;}
+    h2 { font-family: 'Orbitron'; color: #7df9ff; font-size: 1.2em; letter-spacing: .03em; margin-top: 1.3em; margin-bottom: .6em;}
+    @media (max-width: 960px) { .main-card-row, .chart-row, .sub-row { flex-direction:column; gap: 2.6em;} .card { width: 97vw; min-width:0; margin-left:0; margin-right:0;} .dashboard-container{padding:1rem .1rem;} }
+    .back-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.4em 0.9em;
+  font-size: 1.0rem;
+  font-weight: 700;
+  color: #ffffff; /* white text */
+  background: #ef5350; /* filled soft red */
+  border: none; /* no outline */
+  border-radius: 0.8em;
+  text-decoration: none;
+  user-select: none;
+  transition: background 0.22s, color 0.22s, transform 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 20px #ef5350cc; /* glow consistent with the red color */
+}
+
+.back-btn:hover,
+.back-btn:focus {
+  background: #b71c1c;
+  color: #fff;
+  outline: none;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #ef5350cc;}
+  50% { box-shadow: 0 0 20px #ef535088;}
+  100% { box-shadow: 0 0 10px #ef5350cc;}
+}
+  </style>
+
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="login-card" role="main" aria-label="Applicant Login Form">
+      <a href="{{ url_for('welcome') }}" class="back-btn" aria-label="Back to Home">
+  &#8678; Back
+</a>
+    <div class="title-row">
+      <img src="{{ url_for('static', filename='images/Hire-Shield-Logo.png') }}" style="height:3em; margin-right:.5em;"/>
+      <span class="dashboard-title">Hire Shield Dashboard</span>
+    </div>
+
+    <!-- First row: 4 stat cards -->
+    <div class="main-card-row">
+  <div class="big-stat-card stat-flex">
+    <span class="stat-val">{{ total_candidates }}</span>
+    <span class="stat-label">Total Candidates</span>
+  </div>
+  <div class="big-stat-card stat-flex">
+    <span class="stat-val">{{ total_placed }}</span>
+    <span class="stat-label">Total Placed</span>
+  </div>
+  <div class="big-stat-card stat-flex">
+    <span class="stat-val">{{ total_internships }}</span>
+    <span class="stat-label">Total Internships</span>
+  </div>
+  <div class="big-stat-card stat-flex">
+    <span class="stat-val">{{ avg_cgpa }}</span>
+    <span class="stat-label">Average CGPA</span>
+  </div>
+</div>
+
+
+    <!-- Second row: 4 charts -->
+    <div class="chart-row">
+      <div class="card" style="flex:1.1">
+        <h2>Males</h2>
+        <canvas id="genderPieM"></canvas>
+      </div>
+      <div class="card" style="flex:1.1">
+        <h2>Females</h2>
+        <canvas id="genderPieF"></canvas>
+      </div>
+      <div class="card" style="flex:1.4">
+        <h2>Avg Salary by Gender</h2>
+        <canvas id="salaryPie"></canvas>
+      </div>
+      <div class="card" style="flex:2.5">
+        <h2>Avg Salary by Specialisation & Gender</h2>
+        <canvas id="salaryLine"></canvas>
+      </div>
+    </div>
+
+    <!-- Third row: 2 charts, last is avg aptitude by board -->
+    <div class="sub-row">
+      <div class="card" style="flex:1.2">
+        <h2>Gender by Internship</h2>
+        <canvas id="genderIntern"></canvas>
+        <div class="legend-row">
+          <span><span class="legend-dot" style="background:#ff00b8"></span>F</span>
+          <span><span class="legend-dot" style="background:#fcc200"></span>M</span>
+        </div>
+      </div>
+      <div class="card" style="flex:1.6">
+        <h2>Avg Aptitude Score by Board</h2>
+        <canvas id="boardAptitudeBar"></canvas>
+        <div class="legend-row">
+          <span style="color:#6ad1ff;font-weight:600;">Central</span>
+          <span style="color:#c796ff;font-weight:600;">ICSE</span>
+          <span style="color:#ffd26b;font-weight:600;">State</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <script>
+    // Data passed from Flask to JavaScript
+    const genderPieM = {{ gender_pie['M']|tojson }};
+    const genderPieF = {{ gender_pie['F']|tojson }};
+    const salaryLabels = {{ salary_labels|tojson }};
+    const salaryAvgs = {{ salary_avgs|tojson }};
+    const specLabels = {{ specialisations|tojson }};
+    const specF = {{ spec_f|tojson }};
+    const specM = {{ spec_m|tojson }};
+    const gInternX = {{ g_intern['x']|tojson }};
+    const gInternF = {{ g_intern['F']|tojson }};
+    const gInternM = {{ g_intern['M']|tojson }};
+    const boardLabels = {{ board_labels|tojson }};
+    const boardAptitudes = {{ board_aptitudes|tojson }};
+
+    // Gender Pie charts
+    new Chart(document.getElementById('genderPieM'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Male', 'Rest'],
+        datasets: [{
+          data: [genderPieM, genderPieF],
+          backgroundColor: ['#11d0ff', '#24133b']
+        }]
+      },
+      options: {
+        cutout: '77%',
+        plugins: {
+          legend: {display: false},
+          datalabels: {
+            display: true,
+            color: '#fff',
+            font: {weight: 'bold', size: 18},
+            formatter: (value, ctx) => value
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+
+    new Chart(document.getElementById('genderPieF'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Female', 'Rest'],
+        datasets: [{
+          data: [genderPieF, genderPieM],
+          backgroundColor: ['#ff00b8', '#24133b']
+        }]
+      },
+      options: {
+        cutout: '77%',
+        plugins: {
+          legend: {display: false},
+          datalabels: {
+            display: true,
+            color: '#fff',
+            font: {weight: 'bold', size: 18},
+            formatter: (value, ctx) => value
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+
+    // Avg Salary by Gender
+    new Chart(document.getElementById('salaryPie'), {
+      type: 'doughnut',
+      data: {
+        labels: salaryLabels,
+        datasets: [{
+          data: salaryAvgs,
+          backgroundColor: ['#ff00b8', '#fcc200']
+        }]
+      },
+      options: {
+        cutout: '65%',
+        plugins: {
+          legend: {display: true, labels: {color: '#e9e7fd'}},
+          datalabels: {
+            display: true,
+            color: '#fff',
+            font: {weight: 'bold', size: 16},
+            formatter: (value, ctx) => value
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+
+    // Avg Salary by Specialisation & Gender (line)
+    new Chart(document.getElementById('salaryLine'), {
+      type: 'line',
+      data: {
+        labels: specLabels,
+        datasets: [
+          {label:'F',data:specF,borderColor:'#ff00b8',backgroundColor:'rgba(255,0,184,0.20)',fill:false,tension:.23},
+          {label:'M',data:specM,borderColor:'#36ccf9',backgroundColor:'rgba(54,204,249,0.20)',fill:false,tension:.21},
+        ]
+      },
+      options: {
+        plugins: {
+          legend: {labels: {color:'#dfe5ff'}},
+          datalabels: {
+            display: true,
+            color: '#fff',
+            font: {weight: 'bold', size: 14},
+            formatter: (value, ctx) => value
+          },
+          tooltip: {enabled: true}
+        },
+        scales: {
+          x: {ticks:{color:'#aac8ff'}},
+          y: {ticks:{color:'#eedcfa'}}
+        }
+      },
+    });
+
+    // Gender by Internship bar
+    new Chart(document.getElementById('genderIntern'), {
+      type: 'bar',
+      data: {
+        labels: gInternX,
+        datasets: [
+          {label:'F',data:gInternF,backgroundColor:'#ff00b8'},
+          {label:'M',data:gInternM,backgroundColor:'#fcc200'}
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: {
+          legend: {labels: {color:'#e8eafd'}},
+          datalabels: {
+            display: true,
+            anchor: 'end',
+            align: 'right',
+            color: '#fff',
+            font: {weight: 'bold', size: 14},
+            formatter: (value, ctx) => value
+          }
+        },
+        scales: {
+          x: {ticks:{color:'#cce2ff'}},
+          y: {ticks:{color:'#aac8ff'}}
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+
+    // Avg Aptitude Score by Board (bar chart, clear!)
+    new Chart(document.getElementById('boardAptitudeBar'), {
+      type: 'bar',
+      data: {
+        labels: boardLabels,
+        datasets: [{
+          label: 'Avg Aptitude',
+          data: boardAptitudes,
+          backgroundColor: ['#6ad1ff', '#c796ff', '#ffd26b']
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {display: false},
+          datalabels: {
+            display: true,
+            anchor: 'end',
+            align: 'top',
+            color: '#fff',
+            font: {weight: 'bold', size: 14},
+            formatter: (value, ctx) => value
+          }
+        },
+        scales: {
+          x: {ticks:{color:'#aac8ff'}},
+          y: {beginAtZero: true, ticks:{color:'#aac8ff'}}
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+  </script>
+</body>
+</html>

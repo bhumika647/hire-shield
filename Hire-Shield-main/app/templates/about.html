@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us | Hire Shield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans&family=Lato&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%; margin: 0; padding: 0;
+      background: radial-gradient(ellipse 110% 90% at 60% 45%, #223155 0%, #181d25 85%);
+      font-family: 'Open Sans', Arial, sans-serif;
+      color: #c6d6fb;
+      width: 100vw !important;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      padding-bottom: 2rem;
+    }
+    .particles-bg {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 0;
+    }
+    .particle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle at 45% 40%, #36ccf9bb 0%, #8f4afb19 100%);
+      opacity: 0.13;
+      animation: float 15s linear infinite;
+    }
+    @keyframes float {
+      0% {transform: translateY(0) scale(1);}
+      50% {opacity: 0.22; transform: translateY(-45vh) scale(1.1);}
+      100% {opacity: 0.12; transform: translateY(-110vh) scale(1);}
+    }
+    .about-container {
+      position: relative;
+      width: 98vw;
+      max-width: 1060px;
+      margin: 2rem auto 0 auto;
+      padding: 3rem 2vw 2.5rem 2vw;
+      background: linear-gradient(112deg, rgba(34, 50, 77, 0.93) 67%, rgba(55, 97, 150, 0.17) 100%);
+      border-radius: 2.4em;
+      box-shadow: 0 28px 88px #26334a88, 0 12px 38px #36ccf929;
+      color: #b9d5ff;
+      font-size: 1.16rem;
+      line-height: 1.61;
+      z-index: 2;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    .logo-img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 80px;
+      height: 80px;
+      filter: drop-shadow(0 0 13px #36ccf9ae);
+      margin-bottom: 1.5em;
+    }
+    h1 {
+      font-family: 'Orbitron', 'Segoe UI', sans-serif;
+      font-size: 2.14em;
+      font-weight: 900;
+      margin-bottom: 1.85em;
+      text-align: center;
+      background: linear-gradient(90deg, #36ccf9 15%, #8f4afb 85%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.09em;
+      user-select: none;
+    }
+    h2 {
+      font-family: 'Orbitron', 'Segoe UI', sans-serif;
+      font-weight: 700;
+      font-size: 1.3em;
+      margin-top: 2.1em;
+      margin-bottom: 0.93em;
+      background: linear-gradient(90deg, #8f4afb 36%, #36ccf9 85%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p {
+      margin-bottom: 1.48em;
+      color: #c1d2ffdd;
+    }
+    /* Core Features row with circular cards */
+    .core-features {
+      margin-bottom: 2.8em;
+      margin-top: 0;
+    }
+    .core-feature-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 2.2em;
+      margin: 2.1em 0 1.1em 0;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .feature-block {
+      flex: 1 1 160px;
+      max-width: 200px;
+      min-width: 145px;
+      background: rgba(40,60,106,0.13);
+      border-radius: 2.6em;
+      box-shadow: 0 0 20px #8f4afb25;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start;
+      padding: 1.1em 1em 1.01em 1em;
+      min-height: 180px;
+      margin: 0 auto;
+      transition: box-shadow 0.25s;
+    }
+    .feature-block:hover {
+      box-shadow: 0 7px 22px #8f4afbdd;
+      background: linear-gradient(118deg, #34448acc 0%, #8f4afb59 100%);
+    }
+    .feature-ico {
+      width: 64px; height: 64px;
+      border-radius: 50%; background: rgba(63,65,147,0.32);
+      display: flex; align-items: center; justify-content: center;
+      margin: .05em auto .74em auto;
+      font-size: 2.25rem;
+      box-shadow: 0 0 20px #36ccf9cc;
+      filter: drop-shadow(0 0 8px #36ccf9b9);
+      text-align: center;
+      transition: background 0.19s;
+    }
+    .feature-block:hover .feature-ico {
+      background: rgba(118,80,218,0.22);
+    }
+    .feature-block p {
+      font-size: 1.09em;
+      color: #cbe0ff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      word-break: break-word;
+    }
+    /* Technology Stack & Contact as separate full-width panels */
+    .panel-block {
+      background: rgba(34, 50, 77, 0.44);
+      border-radius: 2.1em;
+      margin: 2.6em 0 2.1em 0;
+      box-shadow: 0 6px 25px #36ccf928;
+      padding: 2.2em 2.8vw 2.1em 2.8vw;
+      width: 97%;
+      box-sizing: border-box;
+      margin-right: auto;
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .tech-stack h2, .contact-section h2 {
+      margin-bottom: 0.7em;
+      margin-top: 0;
+    }
+    .tech-list {
+      width: 100%;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 2.7em 1em;
+      margin-top: 1.2em;
+    }
+    .tech-item {
+      display: flex; flex-direction: column; align-items: center;
+      width: 85px; margin: 0 0.1em;
+    }
+    .tech-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 0.4em;
+      filter: drop-shadow(0 0 8px #36ccf9cc);
+      background: rgba(248,248,252,0.08); border-radius: 18px;
+    }
+    .tech-label {
+      font-weight: 600;
+      color: #a3bfff;
+      font-size: 1em;
+      user-select: none; letter-spacing: 0.01em;
+    }
+    .contact-section {
+      text-align: center;
+      margin-bottom: 0;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .contact-section a {
+      margin-top:1.1em;
+      display: inline-block;
+      background: linear-gradient(90deg, #36ccf9, #8f4afb);
+      padding: 0.97em 2.6em;
+      border-radius: 2em; color: white;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      font-family: 'Orbitron', monospace;
+      font-size: 1.12em;
+      text-decoration: none;
+      user-select: none;
+      transition: background 0.24s, box-shadow 0.22s;
+      box-shadow: 0 2px 29px #8f4afbbb, 0 1px 2px #36ccf949;
+    }
+    .contact-section a:hover {
+      background: linear-gradient(90deg, #8f4afb, #36ccf9);
+      box-shadow: 0 8px 24px #6036fbbb;
+    }
+    /* FAQ Section */
+    .faq-section {
+      max-width: 100%;
+      margin: auto;
+    }
+    .faq-item {
+      background: rgba(25, 38, 63, 0.41);
+      margin-bottom: 1em;
+      border-radius: 1.35em;
+      box-shadow: 0 3px 15px #36ccf928;
+      padding: 1em 1.3em;
+      cursor: pointer;
+      user-select: none;
+      color: #a5c9ff;
+      font-weight: 600;
+      font-family: 'Lato', 'Segoe UI', Arial, sans-serif;
+      transition: background-color 0.28s;
+    }
+    .faq-item:hover {
+      background-color: rgba(55, 97, 150, 0.36); box-shadow: 0 5px 20px #36ccf949;
+    }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center; font-size: 1.13em;
+    }
+    .faq-answer {
+      max-height: 0; overflow: hidden; font-size: 1em; color: #c3d0f3; margin-top: 0.6em; line-height: 1.4em; transition: max-height 0.43s;
+    }
+    .faq-item.active .faq-answer { max-height: 200px; }
+    .faq-toggle { font-size: 1.4em; user-select: none; color: #8caeff; transition: transform 0.36s; }
+    .faq-item.active .faq-toggle { transform: rotate(180deg); color: #d9ecff; }
+    @media (max-width: 1200px){
+      .about-container {max-width:99vw;}
+      .panel-block {width: 98%;}
+    }
+    @media (max-width: 900px){
+      .core-feature-row {gap:1.3em;}
+      .feature-block {min-width:120px;max-width:170px;}
+      .panel-block { width: 99%; }
+    }
+    @media (max-width: 700px){
+      .about-container {padding:1rem 0.3rem;}
+      .panel-block{padding:1.1em .17em;}
+      .core-feature-row {flex-direction:column;gap:1.4em;}
+      .feature-block {width:98%;max-width:260px;}
+      .contact-section a {padding:0.97em 0.61em;}
+    }
+    .back-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.4em 0.9em;
+  font-size: 1.0rem;
+  font-weight: 700;
+  color: #ffffff; /* white text */
+  background: #ef5350; /* filled soft red */
+  border: none; /* no outline */
+  border-radius: 0.8em;
+  text-decoration: none;
+  user-select: none;
+  transition: background 0.22s, color 0.22s, transform 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 20px #ef5350cc; /* glow consistent with the red color */
+}
+
+.back-btn:hover,
+.back-btn:focus {
+  background: #b71c1c;
+  color: #fff;
+  outline: none;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #ef5350cc;}
+  50% { box-shadow: 0 0 20px #ef535088;}
+  100% { box-shadow: 0 0 10px #ef5350cc;}
+}
+  </style>
+</head>
+<body>
+  <div class="particles-bg"></div>
+  <div class="about-container">
+    <a href="{{ url_for('welcome') }}" class="back-btn" aria-label="Back to Home">
+  &#8678; Back
+</a>
+    <img src="{{ url_for('static', filename='images/Hire-Shield-Logo.png') }}" alt="Hire Shield Logo" class="logo-img" />
+    <h1>About Hire Shield</h1>
+
+    <section class="mission-vision">
+      <h2>Our Mission & Vision</h2>
+      <p>At Hire Shield, our mission is to provide fair, bias-free, and transparent campus hiring predictions using advanced AI and machine learning. We envision a future where every student has an equal shot at success with clear insights into their placement prospects.</p>
+    </section>
+
+    <section class="core-features">
+      <h2>Core Features</h2>
+      <div class="core-feature-row">
+        <div class="feature-block"><div class="feature-ico">🔍</div><p>Transparent bias detection helping to mitigate unfair hiring practices.</p></div>
+        <div class="feature-block"><div class="feature-ico">🎯</div><p>Personalized placement prediction tailored to your profile.</p></div>
+        <div class="feature-block"><div class="feature-ico">📂</div><p>Seamless resume upload and manual data entry option.</p></div>
+        <div class="feature-block"><div class="feature-ico">📊</div><p>Dashboard with real-time insights for students and recruiters.</p></div>
+      </div>
+    </section>
+
+    <section class="panel-block tech-stack" style="margin-bottom: 1.2em;">
+      <h2>Technology Stack</h2>
+      <div class="tech-list">
+        <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python logo" class="tech-icon" /><div class="tech-label">Python</div></div>
+        <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask logo" class="tech-icon" /><div class="tech-label">Flask</div></div>
+        <div class="tech-item"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-learn logo" class="tech-icon" /><div class="tech-label">Scikit-learn</div></div>
+        <div class="tech-item"><img src="https://pandas.pydata.org/static/img/pandas_mark.svg" alt="Pandas logo" class="tech-icon" /><div class="tech-label">Pandas</div></div>
+        <div class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg" alt="Bootstrap logo" class="tech-icon" /><div class="tech-label">Bootstrap</div></div>
+      </div>
+    </section>
+
+    <section class="panel-block contact-section" style="margin-top: 1.1em;">
+      <h2>Contact Us</h2>
+      <p>If you're interested in partnering, learning more, or getting support, please reach out:</p>
+      <a href="mailto:hireshield.team@gmail.com" aria-label="Email Support">Mail Support</a>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq1">
+          How does Hire Shield ensure unbiased hiring?
+          <span class="faq-toggle" aria-hidden="true">▼</span>
+        </div>
+        <div class="faq-answer" id="faq1" hidden>
+          Hire Shield applies advanced bias detection algorithms to analyze model fairness, helping recruiters make impartial decisions.
+        </div>
+      </div>
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq2">
+          What data does Hire Shield use?
+          <span class="faq-toggle" aria-hidden="true">▼</span>
+        </div>
+        <div class="faq-answer" id="faq2" hidden>
+          Hire Shield uses academic records, aptitude scores, and resume details, processed securely to ensure privacy and accuracy.
+        </div>
+      </div>
+      <div class="faq-item" tabindex="0">
+        <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq3">
+          How private is my data?
+          <span class="faq-toggle" aria-hidden="true">▼</span>
+        </div>
+        <div class="faq-answer" id="faq3" hidden>
+          Your data is never stored beyond analysis. Hire Shield follows strict privacy protocols to protect user information.
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    // Bubble animation
+    const particlesCount = 27;
+    const bg = document.querySelector('.particles-bg');
+    for(let i=0;i<particlesCount;i++){
+      let p = document.createElement('div');
+      p.className = 'particle';
+      let sz = 23 + Math.random() * 97;
+      p.style.width = sz + 'px';
+      p.style.height = sz + 'px';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.animationDuration = 8 + Math.random() * 12 + 's';
+      p.style.animationDelay = Math.random() * 8 + 's';
+      bg.appendChild(p);
+    }
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const faqItem = q.parentElement;
+        const isOpen = faqItem.classList.contains('active');
+        faqItem.classList.toggle('active');
+        const answer = faqItem.querySelector('.faq-answer');
+        if(isOpen) {
+          answer.setAttribute('hidden', '');
+          q.setAttribute('aria-expanded', 'false');
+        } else {
+          answer.removeAttribute('hidden');
+          q.setAttribute('aria-expanded', 'true');
+        }
+      });
+      q.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          q.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

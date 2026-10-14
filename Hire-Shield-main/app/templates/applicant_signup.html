@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Applicant Signup | Hire Shield</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      height: 100%;
+      background: radial-gradient(ellipse 110% 80% at 60% 45%, #223155 0%, #181d25 76%);
+      font-family: 'Open Sans', Arial, sans-serif;
+      color: #e9f2fa;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    .particles-bg {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute; border-radius:50%;
+      background: radial-gradient(circle at 45% 40%, #36ccf9bb 0%, #8f4afb19 100%);
+      opacity:.14;
+      animation: float 14s linear infinite;
+    }
+    @keyframes float {
+      0%{transform:translateY(0) scale(1);}
+      50%{opacity:.23;transform:translateY(-40vh) scale(1.13);}
+      100%{opacity:.11;transform:translateY(-105vh) scale(1);}
+    }
+    .signup-container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .signup-card {
+      background: linear-gradient(115deg, rgba(40,56,91,0.87) 68%, rgba(55,97,150,0.22) 110%);
+      box-shadow: 0 24px 70px #233760a3, 0 6px 48px #36ccf970;
+      border-radius: 2.5em;
+      padding: 1.5em 2.6em 1.2em 2.6em;
+      min-width: 440px;
+      max-width: 700px;
+      width: 98vw;
+      border: 2.9px solid #36ccf9a8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeInCard 0.9s cubic-bezier(.46,.31,.49,1.14);
+    }
+    @keyframes fadeInCard {
+      0% {opacity: 0; transform: translateY(40px) scale(.97);}
+      45%{opacity: .72;transform:translateY(-7px) scale(1.05);}
+      100% {opacity: 1; transform: none;}
+    }
+    .logo-signup-img {
+      width: 66px; height: 66px; margin-bottom: 0.7em; display: block;
+      filter: drop-shadow(0 0 12px #36ccf9bb);
+    }
+    h1 {
+      text-align: center;
+      font-family: 'Orbitron', 'Segoe UI', sans-serif;
+      font-size: 1.28em;
+      font-weight: 800;
+      background: linear-gradient(90deg,#36ccf9 10%,#8f4afb 82%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: .03em; margin-top:0;margin-bottom:1em;
+    }
+    .signup-fields-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.3em 2.2em;
+      margin-bottom: 1.1em;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .form-group {
+      flex: 1 1 47%;
+      min-width: 165px;
+      position: relative;
+      margin-bottom: 0.20em;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group.fullwidth { flex: 1 1 100%; }
+    label {
+      font-weight: 700;
+      font-size: 1.09rem;
+      color: #91e0f9;
+      margin-bottom: 0.28em;
+      letter-spacing: .007em;
+      user-select:none;
+    }
+    input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+      padding: 0.73em 1.10em;
+      font-size: 1.06rem;
+      border-radius: 1.17em;
+      border: none;
+      background: rgba(242,247,255,0.135);
+      color: #1a253b;
+      font-weight: 600;
+      box-shadow: inset 0 0 13px #8f4afb21;
+      outline: none;
+      margin-bottom: 0.02em;
+      transition: box-shadow 0.24s, background 0.18s;
+    }
+    input:focus {
+      background: rgba(143,74,251,0.17);
+      box-shadow: 0 0 13px #8f4afbaa, inset 0 0 13px #8f4afbaa;
+      color: #05234f;
+    }
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1.2em;
+      font-weight: 600;
+      font-size: 1.01rem;
+      color: #8a9eda;
+      user-select: none;
+      width:100%;
+    }
+    .checkbox-container input {
+      width: 21px;
+      height: 21px;
+      cursor: pointer;
+      accent-color: #8f4afb;
+    }
+    .checkbox-container label a {
+      color: #64caff;
+      text-decoration: underline;
+      transition: color 0.3s;
+    }
+    .checkbox-container label a:hover { color: #a588ff;}
+    button[type="submit"] {
+      width: 100%;
+      padding: 0.8em 0;
+      font-size: 1.08rem;
+      font-weight: 800;
+      border-radius: 1.8em;
+      border: none;
+      color: white;
+      background: linear-gradient(92deg, #36ccf9, #8f4afb);
+      box-shadow: 0 3px 17px #8f4afb99;
+      cursor: pointer;
+      margin: 0.8em 0 0.12em 0;
+      transition: background 0.22s, box-shadow 0.22s;
+      user-select: none;
+    }
+    button[type="submit"]:hover { background: linear-gradient(92deg, #8f4afb, #36ccf9);}
+    .flash-message {
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 1em;
+      padding: 12px 15px;
+      user-select: none;
+      text-align: center;
+    }
+    .flash-message.error {
+      background-color: #ff4b5c; color: white; box-shadow: 0 0 12px #ff6464aa;
+    }
+    .flash-message.success {
+      background-color: #4de27b; color: white; box-shadow: 0 0 12px #36ff7aab;
+    }
+    .page-footer {
+      width: 90%; text-align: center; margin: 1.4em auto 0 auto;
+      color: #92d3fd;
+      font-family: 'Orbitron', 'Segoe UI', Arial;
+      font-size: 1.02em;
+      opacity: 0.92; letter-spacing: .04em;
+    }
+    @media (max-width: 720px) {
+      .signup-card {
+        max-width: 98vw;
+        min-width: unset;
+        padding: 1.2em 0.65em 1em 0.65em;
+      }
+      .signup-fields-wrap {
+        flex-direction: column;
+        gap: 1em;
+      }
+      .form-group{min-width:90vw;}
+    }
+    .back-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.4em 0.9em;
+  font-size: 1.0rem;
+  font-weight: 700;
+  color: #ffffff; /* white text */
+  background: #ef5350; /* filled soft red */
+  border: none; /* no outline */
+  border-radius: 0.8em;
+  text-decoration: none;
+  user-select: none;
+  transition: background 0.22s, color 0.22s, transform 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 20px #ef5350cc; /* glow consistent with the red color */
+}
+
+.back-btn:hover,
+.back-btn:focus {
+  background: #b71c1c;
+  color: #fff;
+  outline: none;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #ef5350cc;}
+  50% { box-shadow: 0 0 20px #ef535088;}
+  100% { box-shadow: 0 0 10px #ef5350cc;}
+}
+  </style>
+</head>
+<body>
+  <div class="particles-bg" id="particles-bg"></div>
+  <div class="signup-container" role="main">
+    <div class="signup-card">
+      <a href="{{ url_for('applicant_login') }}" class="back-btn" aria-label="Back to Home">
+  &#8678; Back
+</a>
+      <img src="{{ url_for('static', filename='images/Hire-Shield-Logo.png') }}" alt="Hire Shield Logo" class="logo-signup-img" />
+      <h1>Applicant Signup</h1>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <form method="post" autocomplete="off" novalidate>
+        <div class="signup-fields-wrap">
+          <div class="form-group">
+            <label for="full_name">Full Name</label>
+            <input type="text" name="full_name" id="full_name" required minlength="3" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" name="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Create Password</label>
+            <input type="password" name="password" id="password" required minlength="8" />
+          </div>
+          <div class="form-group">
+            <label for="phone_number">Phone Number</label>
+            <input type="tel" name="phone_number" id="phone_number" required pattern="^\d{10}$" />
+          </div>
+          <div class="form-group fullwidth">
+            <label for="college">College/University</label>
+            <input type="text" name="college" id="college" required minlength="3" />
+          </div>
+        </div>
+        <div class="checkbox-container">
+          <input type="checkbox" name="terms" id="terms" required />
+          <label for="terms">I accept the <a href="#">Terms and Privacy Policy</a></label>
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+      <footer class="page-footer">
+        &copy; 2025 Hire Shield™ — AI Campus Hiring
+      </footer>
+    </div>
+  </div>
+  <script>
+    const particlesCount = 30;
+    const bg = document.getElementById('particles-bg');
+    for(let i=0; i<particlesCount; i++){
+      let p = document.createElement('div');
+      p.className = 'particle';
+      let sz = 26 + Math.random()*110;
+      p.style.width = sz + 'px';
+      p.style.height = sz + 'px';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.animationDuration = 10 + Math.random()*14 + 's';
+      p.style.animationDelay = Math.random()*7 + 's';
+      bg.appendChild(p);
+    }
+  </script>
+</body>
+</html>
