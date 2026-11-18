@@ -743,8 +743,8 @@ def review_prediction(log_id):
 
     return render_template('review_form.html', log=log, log_id=log_id, error=error)
 
-model = joblib.load('placement_xgb_model.joblib')
-label_encoders = joblib.load('label_encoders.joblib')
+#model = joblib.load('placement_xgb_model.joblib')
+#label_encoders = joblib.load('label_encoders.joblib')
 
 PROGRAM_MAP = {0: "BCA", 1: "BTech"}
 INTERNSHIP_MAP = {0: "No", 1: "Yes"}
