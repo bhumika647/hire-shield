@@ -272,9 +272,8 @@ def log_prediction(applicant_features, predicted_label, review_status="pending",
 if src_dir not in sys.path:
     sys.path.insert(0, src_dir)
 
-from bias_detection_placement import detect_bias_placement as detect_bias
-from visualization_placement import plot_placement_bias as plot_bias
-
+from bias_detection_placement import detect_bias_placement as detect_bias  # type: ignore
+from visualization_placement import plot_placement_bias as plot_bias  # type: ignore
 
 model_path = os.path.join(root_dir, 'models', 'placement_model_mitigated.pkl')
 test_data_path = os.path.join(root_dir, 'data', 'processed', 'test_sample_mitigated.csv')
@@ -831,4 +830,5 @@ def about():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+  app.run(debug=True)
+  
